@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.css">
+  <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
+</head>
+<body>
+<table id="table">
+  <thead>
+    <tr>
+      <th data-field="id">ID</th>
+      <th data-field="thc">THC</th>
+      <th data-field="cbd">CBD</th>
+      <th data-field="file">Certificate</th>
+    </tr>
+  </thead>
+</table>
+</body>
+<script>
+  window.addEventListener('load', () => {
+      const script = document.createElement('script')
+      script.src = "https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js";
+      script.onLoad = () => {
+        let data;
+        $.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQDx0dIHr2NwgJq1AUYnY94MrZR20ttfsrBoHJcux65YDYilf_rWTqO3hxdddI6jzRSJM2Ts-wo1Knp/pub?output=csv')
+        .then(csv => {
+          data = csv.split("\r\n").map(row => {
+            const [date, file, id, thc, cbd ] = row.split(',')
+              return {
+                id, file, thc, cbd
+              }
+            })
+            $('#table').bootstrapTable({ data })
+          })
+        }
+      document.head.appendChild(script)
+    });
+</script>
+</html>
