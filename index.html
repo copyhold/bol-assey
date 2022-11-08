@@ -59,7 +59,10 @@
       <div class="b-example-divider"></div>
     <div class="container">
       <div class="row">
-        <table id="table" data-search="true" class="table table-bordered table-hover text-uppercase">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status" id="loadingdata"></div>
+        </div>
+        <table id="table" style="display: none;" data-pagination="true" data-search="true" class="table table-bordered table-hover text-uppercase">
           <thead>
             <tr>
               <th data-field="id"  data-sortable="true">מספר אצווה</th>
@@ -104,7 +107,8 @@
                 thc: `${thc}%`,
               }
             })
-            $('#table').bootstrapTable({ data })
+            document.getElementById('loadingdata').remove()
+            $('#table').show().bootstrapTable({ data })
           })
         }
       document.head.appendChild(script)
