@@ -110,11 +110,11 @@
       script.src = "https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js";
       script.onload = () => {
         let data;
-        $.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQDx0dIHr2NwgJq1AUYnY94MrZR20ttfsrBoHJcux65YDYilf_rWTqO3hxdddI6jzRSJM2Ts-wo1Knp/pub?output=csv')
-        .then(csv => {
-          const [header, ...rows] = csv.split("\r\n")
-          data = rows.map(row => {
-            const [date, file, id, thc, cbd ] = row.split(',')
+        fetch('https://bolpharma.com/wp-json/acf/v3/pages/99/certificates')
+        .then(res => res.json())
+        .then(json => {
+          data = json.certificates.map(row => {
+            const {certificate: file, cert_id: id, thc, cbd } = row
               return {
                 id, 
                 file: `<a href="${file}" target=_blank>קישור</a>`, 
