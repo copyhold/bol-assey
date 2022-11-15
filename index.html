@@ -111,7 +111,9 @@
       script.src = "https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js";
       script.onload = () => {
         let data;
-        fetch('https://assay.bolpharma.com/wp-json/acf/v3/pages/99/certificates')
+        fetch('https://assay.bolpharma.com/wp-json/acf/v3/pages/99/certificates', {
+            headers: { 'Cache-control': 'no-cache', }
+        })
         .then(res => res.json())
         .then(json => {
           data = json.certificates.map(row => {
