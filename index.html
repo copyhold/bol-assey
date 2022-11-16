@@ -120,7 +120,7 @@
                 id, 
                 file: `<a href="${file}" target=_blank>קישור</a>`, 
                 cbd: cbd > 0 ? `${cbd}%` : 'Less than 0.1%',
-                thc: `${thc}%`,
+                thc: thc > 0 ? `${thc}%` : 'Less than 0.1%',
               }
             })
             document.getElementById('loadingdata').remove()
